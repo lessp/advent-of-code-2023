@@ -1,3 +1,9 @@
+This excellent OCaml start project for AoC was created by [Sixstring982](https://github.com/Sixstring982).
+
+Here's the original repository [tanenbaum](https://github.com/Sixstring982/tanenbaum).
+
+---
+
 **_Tanenbaum_**
 
 ![Tanenbaum logo](https://github.com/Sixstring982/tanenbaum/blob/main/public/logo.webp?raw=true "Tanenbaum logo")
@@ -73,14 +79,16 @@ export AUTH_TOKEN="5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 > [!TIP]
 > If you don't want to configure authentication, you will manually need to create your input directories and files.
 > This can be done by creating the following directory structure from the project root:
-> ```shell 
+>
+> ```shell
 > $ mkdir inputs/{year}/{day}.txt
 > ```
+>
 > where Day 01 of 2023 would look like:
-> ```shell 
+>
+> ```shell
 > $ mkdir inputs/2023/01.txt
 > ```
-
 
 ## Working on problems
 
@@ -163,14 +171,14 @@ $ dune exec --watch bin/main.exe -- \
   --day=1 \
   --part=1
 
-  # output 
+  # output
   your_answer
 ```
 
 ### Submitting answers
 
 Once you're convinced that your problem produces the correct output, you can
-either copy and paste your solution into the answer form on `adventofcode.com`, 
+either copy and paste your solution into the answer form on `adventofcode.com`,
 or you can also submit your answer using the CLI via the `--submit` flag.
 
 > [!WARNING]
