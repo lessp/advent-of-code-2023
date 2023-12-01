@@ -59,15 +59,15 @@ module Part_2 = struct
     and scan_number chars =
       match chars with
       (* quick n' dirty way to handle e.g. "oneight" *)
-      | 'o' :: 'n' :: 'e' :: tail -> Some ('1', (* -> *) 'e' (* <- *) :: tail)
-      | 't' :: 'w' :: 'o' :: tail -> Some ('2', 'o' :: tail)
-      | 't' :: 'h' :: 'r' :: 'e' :: 'e' :: tail -> Some ('3', 'e' :: tail)
-      | 'f' :: 'o' :: 'u' :: 'r' :: tail -> Some ('4', 'r' :: tail)
-      | 'f' :: 'i' :: 'v' :: 'e' :: tail -> Some ('5', 'e' :: tail)
-      | 's' :: 'i' :: 'x' :: tail -> Some ('6', 'x' :: tail)
-      | 's' :: 'e' :: 'v' :: 'e' :: 'n' :: tail -> Some ('7', 'n' :: tail)
-      | 'e' :: 'i' :: 'g' :: 'h' :: 't' :: tail -> Some ('8', 't' :: tail)
-      | 'n' :: 'i' :: 'n' :: 'e' :: tail -> Some ('9', 'e' :: tail)
+      | 'o' :: 'n' :: 'e' :: _ -> Some ('1', List.drop chars 2)
+      | 't' :: 'w' :: 'o' :: _ -> Some ('2', List.drop chars 2)
+      | 't' :: 'h' :: 'r' :: 'e' :: 'e' :: _ -> Some ('3', List.drop chars 4)
+      | 'f' :: 'o' :: 'u' :: 'r' :: _ -> Some ('4', List.drop chars 3)
+      | 'f' :: 'i' :: 'v' :: 'e' :: _ -> Some ('5', List.drop chars 3)
+      | 's' :: 'i' :: 'x' :: _ -> Some ('6', List.drop chars 2)
+      | 's' :: 'e' :: 'v' :: 'e' :: 'n' :: _ -> Some ('7', List.drop chars 4)
+      | 'e' :: 'i' :: 'g' :: 'h' :: 't' :: _ -> Some ('8', List.drop chars 4)
+      | 'n' :: 'i' :: 'n' :: 'e' :: _ -> Some ('9', List.drop chars 3)
       | _ -> None
     ;;
 
