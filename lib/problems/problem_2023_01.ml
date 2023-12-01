@@ -7,9 +7,7 @@ module Part_1 = struct
 
     let separate_calibrations input = input |> String.split ~on:'\n'
 
-    let find_first_digit chars =
-      chars |> List.find ~f:Char.is_digit |> Option.map ~f:Char.to_string
-    ;;
+    let find_first_digit chars = chars |> List.find ~f:Char.is_digit
     let find_last_digit chars = chars |> List.rev |> find_first_digit
 
     let get_calibration_value chars =
@@ -17,7 +15,8 @@ module Part_1 = struct
       let last_digit = find_last_digit chars in
 
       match first_digit, last_digit with
-      | Some first_digit, Some last_digit -> first_digit ^ last_digit |> Int.of_string
+      | Some first_digit, Some last_digit ->
+        [ first_digit; last_digit ] |> String.of_char_list |> Int.of_string
       | _ -> 0
     ;;
 
@@ -72,21 +71,16 @@ module Part_2 = struct
       | _ -> None
     ;;
 
-    let find_first_digit chars =
-      chars |> List.find ~f:Char.is_digit |> Option.map ~f:Char.to_string
-    ;;
-
-    let find_last_digit chars =
-      let result = chars |> List.rev |> find_first_digit in
-      result
-    ;;
+    let find_first_digit chars = chars |> List.find ~f:Char.is_digit
+    let find_last_digit chars = chars |> List.rev |> find_first_digit
 
     let get_calibration_value chars =
       let first_digit = find_first_digit chars in
       let last_digit = find_last_digit chars in
 
       match first_digit, last_digit with
-      | Some first_digit, Some last_digit -> first_digit ^ last_digit |> Int.of_string
+      | Some first_digit, Some last_digit ->
+        [ first_digit; last_digit ] |> String.of_char_list |> Int.of_string
       | _ -> 0
     ;;
 
