@@ -1,4 +1,4 @@
-This excellent OCaml start project for AoC was created by [Sixstring982](https://github.com/Sixstring982).
+This excellent OCaml starter project for [Advent of Code](https://adventofcode.com/) was created by [Sixstring982](https://github.com/Sixstring982).
 
 Here's the original repository [tanenbaum](https://github.com/Sixstring982/tanenbaum).
 
