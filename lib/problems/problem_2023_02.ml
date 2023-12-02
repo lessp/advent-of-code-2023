@@ -4,7 +4,7 @@ let day = 2
 module Cube_conundrum = struct
   open Base
 
-  module Bag = struct
+  module Cube_count = struct
     type t =
       { red : int
       ; green : int
@@ -15,15 +15,9 @@ module Cube_conundrum = struct
   end
 
   module Game = struct
-    type reveal =
-      { red : int
-      ; green : int
-      ; blue : int
-      }
-
     type t =
       { id : int
-      ; reveals : reveal list
+      ; reveals : Cube_count.t list
       }
 
     let create id reveals = { id; reveals }
@@ -31,32 +25,32 @@ module Cube_conundrum = struct
     let max_reveal_per_color t =
       t.reveals
       |> List.fold
-           ~f:(fun acc reveal ->
+           ~f:(fun acc (reveal : Cube_count.t) ->
              { red = max acc.red reveal.red
              ; green = max acc.green reveal.green
              ; blue = max acc.blue reveal.blue
              })
-           ~init:{ red = 0; green = 0; blue = 0 }
+           ~init:(Cube_count.create ~red:0 ~green:0 ~blue:0)
     ;;
 
-    let is_playable t ~(bag : Bag.t) =
+    let is_playable t ~(available_cubes : Cube_count.t) =
       let required_cubes = max_reveal_per_color t in
 
-      required_cubes.red <= bag.red
-      && required_cubes.green <= bag.green
-      && required_cubes.blue <= bag.blue
+      required_cubes.red <= available_cubes.red
+      && required_cubes.green <= available_cubes.green
+      && required_cubes.blue <= available_cubes.blue
     ;;
 
     let parse_reveal s =
       String.split s ~on:','
       |> List.fold
-           ~f:(fun acc reveal ->
+           ~f:(fun (acc : Cube_count.t) reveal ->
              match reveal |> String.strip |> String.split ~on:' ' with
              | [ cubes; "red" ] -> { acc with red = Int.of_string cubes }
              | [ cubes; "green" ] -> { acc with green = Int.of_string cubes }
              | [ cubes; "blue" ] -> { acc with blue = Int.of_string cubes }
              | _ -> acc)
-           ~init:{ red = 0; green = 0; blue = 0 }
+           ~init:(Cube_count.create ~red:0 ~green:0 ~blue:0)
     ;;
 
     let parse s =
@@ -72,13 +66,13 @@ module Cube_conundrum = struct
 
   (* Part 1 *)
   let solve input =
-    let bag = Bag.create ~red:12 ~green:13 ~blue:14 in
+    let bag = Cube_count.create ~red:12 ~green:13 ~blue:14 in
 
     let playable_games =
       input
       |> String.split ~on:'\n'
       |> List.filter_map ~f:Game.parse
-      |> List.filter ~f:(Game.is_playable ~bag)
+      |> List.filter ~f:(Game.is_playable ~available_cubes:bag)
     in
 
     playable_games |> List.fold ~f:(fun sum ({ id; _ } : Game.t) -> sum + id) ~init:0
